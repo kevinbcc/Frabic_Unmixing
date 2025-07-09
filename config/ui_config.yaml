@@ -1,0 +1,5 @@
+appearance_mode: light
+theme_color: green
+window_size:
+  height: 1200
+  width: 1800

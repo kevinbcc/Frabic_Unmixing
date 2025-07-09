@@ -1,0 +1,5 @@
+paths:
+  output_dir: data
+  preprocessed_dir: preprocessing_data
+  result_dir: result
+  upload_dir: uploaded

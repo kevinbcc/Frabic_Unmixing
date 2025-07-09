@@ -1,0 +1,92 @@
+{
+    "COMPACT100C_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 99.95,
+            "poly": 0.05
+        },
+        "rmse": {
+            "cotton": 0.1,
+            "poly": 0.1
+        }
+    },
+    "COMPACT100P_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 0.04,
+            "poly": 99.96
+        },
+        "rmse": {
+            "cotton": 0.06,
+            "poly": 0.06
+        }
+    },
+    "COMPACT5050_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 49.97,
+            "poly": 50.03
+        },
+        "rmse": {
+            "cotton": 0.22,
+            "poly": 0.22
+        }
+    },
+    "MVS100C_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 99.96,
+            "poly": 0.04
+        },
+        "rmse": {
+            "cotton": 0.09,
+            "poly": 0.09
+        }
+    },
+    "MVS100P_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 0.02,
+            "poly": 99.98
+        },
+        "rmse": {
+            "cotton": 0.03,
+            "poly": 0.03
+        }
+    },
+    "MVS5050_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 49.85,
+            "poly": 50.15
+        },
+        "rmse": {
+            "cotton": 0.17,
+            "poly": 0.17
+        }
+    },
+    "OE100C_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 99.97,
+            "poly": 0.03
+        },
+        "rmse": {
+            "cotton": 0.05,
+            "poly": 0.05
+        }
+    },
+    "OE100P_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 0.0,
+            "poly": 100.0
+        },
+        "rmse": {
+            "cotton": 0.0,
+            "poly": 0.0
+        }
+    },
+    "OE5050_RT_roi_25x500": {
+        "avg_predicted": {
+            "cotton": 49.94,
+            "poly": 50.06
+        },
+        "rmse": {
+            "cotton": 0.07,
+            "poly": 0.07
+        }
+    }
+}

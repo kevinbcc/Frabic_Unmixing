@@ -1,0 +1,10 @@
+preprocessing:
+  amplification_factor: 2.0
+  band_options:
+  - 10
+  - 20
+  - 50
+  - 80
+  - 100
+  - 224
+  default_mode: SNV

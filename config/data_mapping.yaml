@@ -1,0 +1,28 @@
+mapping:
+  COMPACT100C_RT_roi_25x500.npy:
+  - 1.0
+  - 0.0
+  COMPACT100P_RT_roi_25x500.npy:
+  - 0.0
+  - 1.0
+  COMPACT5050_RT_roi_25x500.npy:
+  - 0.5
+  - 0.5
+  MVS100C_RT_roi_25x500.npy:
+  - 1.0
+  - 0.0
+  MVS100P_RT_roi_25x500.npy:
+  - 0.0
+  - 1.0
+  MVS5050_RT_roi_25x500.npy:
+  - 0.5
+  - 0.5
+  OE100C_RT_roi_25x500.npy:
+  - 1.0
+  - 0.0
+  OE100P_RT_roi_25x500.npy:
+  - 0.0
+  - 1.0
+  OE5050_RT_roi_25x500.npy:
+  - 0.5
+  - 0.5
