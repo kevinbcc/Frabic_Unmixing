@@ -50,9 +50,13 @@ class Preprocessing:
 
     def snv(self, input_data):
         '''
-        input_data : hyperspectral data can be
-                    3d [width , height , bands]
-                    2d [average spectral samples, bands]
+        Apply Standard Normal Variate (SNV) transformation to input data
+
+        Parameters:
+            input_data : numpy.ndarray, input data with shape (..., bands)
+
+        Returns:
+        numpy.ndarray : SNV-transformed data with same shape as input
         '''
         d = len(input_data.shape) - 1
         mean = input_data.mean(d)
