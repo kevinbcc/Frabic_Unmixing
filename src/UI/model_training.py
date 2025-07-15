@@ -99,9 +99,13 @@ def run_model_training(mode: str, band_num: int):
     with torch.no_grad():
         pred_Y = model(test_X)
 
+    # 儲存預測結果並分類
     results_by_source = save_predictions_by_source(test_sources, pred_Y, test_Y)
+
+    # 計算並顯示/儲存 RMSE
     rmse_by_source = calculate_rmse_by_source(results_by_source, save_csv_path="result/sourcewise_rmse.csv")
 
+    # 顯示每一種紗種的真實成分平均比例（Cotton / Poly）
     print_avg_predicted_ratios(results_by_source)
 
     output_json = {}
