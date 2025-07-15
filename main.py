@@ -4,6 +4,8 @@ from src.config_loader import write_default_configs
 
 
 write_default_configs()
+
+# 初始化樣式
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
 
