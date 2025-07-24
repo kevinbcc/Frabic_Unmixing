@@ -9,6 +9,7 @@ write_default_configs()
 ctk.set_appearance_mode("light")
 ctk.set_default_color_theme("green")
 
+# 調整視窗大小
 app = ctk.CTk()
 app.title("紗線高光譜辨識系統")
 app.geometry("1800x1200")
