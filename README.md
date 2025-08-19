@@ -36,7 +36,7 @@ conda activate FRABIC_Multi-Layer_Perceptron2
 ## 執行程式
 
 ```bash
-python main_ui.py
+python main.py
 ```
 
 ---
