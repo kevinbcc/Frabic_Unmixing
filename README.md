@@ -63,8 +63,7 @@ FABRIC_UNMIXING/
 │   ├── preprocessing.py
 │   ├── train.py
 │   └── utils.py
-│── main.py  # 主程式(分析比例和RMSE誤差值)
-└── main_ui8.py  # 主程式（customtkinter GUI）
+└── main.py  # 主程式(分析比例和RMSE誤差值)
 ```
 
 ---
