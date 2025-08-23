@@ -18,6 +18,7 @@ def plot_spectra_in_gui(mode: str, band_num: int, frame_main):
         mode : str, preprocessing mode (SNV, PCA_BANDSELECT, SNV_PCABANDSELECT)
         band_num : int, number of bands for preprocessing
     '''
+    # 1) 收集檔案
     npy_files = sorted([f for f in os.listdir(OUTPUT_DIR) if f.endswith(".npy")])
     if not npy_files:
         messagebox.showerror("錯誤", "找不到 .npy 檔案")
@@ -26,32 +27,32 @@ def plot_spectra_in_gui(mode: str, band_num: int, frame_main):
     file_paths = [os.path.join(OUTPUT_DIR, f) for f in npy_files]
     file_names = [os.path.splitext(f)[0] for f in npy_files]
 
-    orig_spectra = []
-    processed_spectra = []
+    # 2) 原始平均光譜
+    orig_spectra = [np.mean(np.load(p), axis=0) for p in file_paths]
+
+    # 3) 批次前處理（關鍵差異：一次把所有檔案丟進 preprocess）
     amplification_factor = 2.0
     preprocessor = Preprocessing(n_components=band_num, mode=mode, amplification_factor=amplification_factor)
 
-    for path in file_paths:
-        arr = np.load(path)
-        mean_orig = np.mean(arr, axis=0)
-        orig_spectra.append(mean_orig)
+    # 清乾淨暫存輸出資料夾，避免殘留舊檔
+    os.makedirs(OUTPUT_NPY_PREPROCESSING_DIR, exist_ok=True)
+    for _f in os.listdir(OUTPUT_NPY_PREPROCESSING_DIR):
+        _p = os.path.join(OUTPUT_NPY_PREPROCESSING_DIR, _f)
+        try:
+            os.remove(_p)
+        except IsADirectoryError:
+            shutil.rmtree(_p)
 
-        temp_path = os.path.join(OUTPUT_NPY_PREPROCESSING_DIR, "temp.npy")
-        temp_processed_path = os.path.join(OUTPUT_NPY_PREPROCESSING_DIR, "temp_processed.npy")
-        np.save(temp_path, arr)
-        preprocessor.preprocess([temp_path], [temp_processed_path])
-        if os.path.exists(temp_processed_path):
-            processed_data = np.load(temp_processed_path)
-            mean_processed = np.mean(processed_data, axis=0)
-        else:
-            mean_processed = mean_orig
-            print(f"Warning: Preprocessing failed for {path}, using original data.")
-        if os.path.exists(temp_path):
-            os.remove(temp_path)
-        if os.path.exists(temp_processed_path):
-            os.remove(temp_processed_path)
-        processed_spectra.append(mean_processed)
+    # 產生對應輸出路徑，與原始檔名一一對應
+    proc_paths = [os.path.join(OUTPUT_NPY_PREPROCESSING_DIR, os.path.basename(p)) for p in file_paths]
 
+    # ★ 一次性呼叫，PCA 會用 vstack(全部資料) 來決定同一組 band
+    preprocessor.preprocess(file_paths, proc_paths)
+
+    # 4) 前處理後的平均光譜
+    processed_spectra = [np.mean(np.load(p), axis=0) for p in proc_paths]
+
+    # 5) 繪圖（沿用你原本的 GUI 佈局）
     frame_spectra = frame_main.winfo_children()[-1]
     for widget in frame_spectra.winfo_children():
         widget.destroy()
@@ -62,6 +63,7 @@ def plot_spectra_in_gui(mode: str, band_num: int, frame_main):
     right_frame = ctk.CTkFrame(frame_spectra)
     right_frame.pack(side="right", expand=True, fill="both", padx=10, pady=10)
 
+    # 原始
     fig1, ax1 = plt.subplots(figsize=(6, 4))
     for spec, name in zip(orig_spectra, file_names):
         ax1.plot(spec, label=name)
@@ -74,6 +76,7 @@ def plot_spectra_in_gui(mode: str, band_num: int, frame_main):
     canvas1.draw()
     canvas1.get_tk_widget().pack(expand=True, fill="both")
 
+    # 前處理後（PCA_BANDSELECT / SNV_PCABANDSELECT 等）
     fig2, ax2 = plt.subplots(figsize=(6, 4))
     for spec, name in zip(processed_spectra, file_names):
         ax2.plot(spec, label=name)
@@ -85,6 +88,7 @@ def plot_spectra_in_gui(mode: str, band_num: int, frame_main):
     canvas2 = FigureCanvasTkAgg(fig2, master=right_frame)
     canvas2.draw()
     canvas2.get_tk_widget().pack(expand=True, fill="both")
+
 
 def display_ratio_analysis(mode_selector, band_num_selector, frame_other1):
     '''
